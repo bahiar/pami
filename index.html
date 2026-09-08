@@ -78,7 +78,7 @@
   }
   #search:focus { border-color: var(--secondary); }
 
-  #map { flex: 1; }
+  #map { position: absolute; inset: 0; height: 100%; width: 100%; }
 
   .leaflet-popup-content-wrapper { border-radius: 10px; }
   .popup-tipo {
@@ -124,6 +124,8 @@ const COLORS = { MC: '#1E88E5', US: '#E53935', SF: '#43A047' };
 const JSON_URL = 'ubicaciones.json'; // mismo repo. Si lo servís desde otro repo, poné la URL raw de GitHub acá.
 
 const map = L.map('map', { zoomControl: true }).setView([-38.7196, -62.2724], 12);
+setTimeout(() => map.invalidateSize(), 100);
+window.addEventListener('resize', () => map.invalidateSize());
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
